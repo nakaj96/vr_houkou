@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>360度VR画像切り替え</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- A-Frameライブラリ -->
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+
+  <style>
+    #buttons {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    a-scene {
+      width: 100%;
+      height: 500px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 style="text-align: center;">360度VR画像切り替え</h1>
+
+  <!-- 切り替えボタン -->
+  <div id="buttons">
+    <button onclick="changeImage('panorama1.jpg')">画像1</button>
+    <button onclick="changeImage('panorama2.jpg')">画像2</button>
+    <button onclick="changeImage('panorama3.jpg')">画像3</button>
+  </div>
+
+  <!-- A-Frame VRシーン -->
+  <a-scene embedded>
+    <a-assets>
+      <!-- 画像を事前読み込み -->
+      <img id="img1" src="panorama1.jpg">
+      <img id="img2" src="panorama2.jpg">
+      <img id="img3" src="panorama3.jpg">
+    </a-assets>
+    <a-sky id="sky" src="#img1" rotation="0 -130 0"></a-sky>
+  </a-scene>
+
+  <script>
+    function changeImage(filename) {
+      // a-assets 内の画像IDを取得
+      let sky = document.getElementById('sky');
+      let newSrc = '';
+
+      if (filename === 'panorama1.jpg') newSrc = '#img1';
+      if (filename === 'panorama2.jpg') newSrc = '#img2';
+      if (filename === 'panorama3.jpg') newSrc = '#img3';
+
+      sky.setAttribute('src', newSrc);
+    }
+  </script>
+
+</body>
+</html>
